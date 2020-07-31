@@ -20,22 +20,24 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
         title: Text('Expanse Planner'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: 100,
-            child: Card(
-              color: Colors.purpleAccent,
-              shadowColor: Colors.amberAccent,
-              elevation: 10,
-              child: Text("CHART!"),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 100,
+              child: Card(
+                color: Colors.purpleAccent,
+                shadowColor: Colors.amberAccent,
+                elevation: 10,
+                child: Text("CHART!"),
+              ),
             ),
-          ),
-          UsersTransactions(),
-        ],
+            UsersTransactions(),
+          ],
+        ),
       ),
     );
   }
