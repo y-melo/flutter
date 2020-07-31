@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTx;
   NewTransaction(this.addTx);
 
   @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  @override
   Widget build(BuildContext context) {
-    // var titleInput;
-    // var amountInput;
     final titleController = TextEditingController();
     final amountController = TextEditingController();
+
+    void _submitData() {
+      final enteredTitle = titleController.text;
+      final enteredAmount = double.parse(amountController.text);
+      print("Title: $enteredTitle | Amount: $enteredAmount");
+      if (enteredTitle.isEmpty || enteredAmount <= 0) {
+        return;
+      }
+      widget.addTx(enteredTitle, enteredAmount);
+    }
 
     return Card(
       elevation: 2,
@@ -22,9 +35,13 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: "Title"),
               controller: titleController,
+              onSubmitted: (_) => _submitData(),
               // onChanged: (str) => titleInput = str
             ),
             TextField(
+              keyboardType: TextInputType.numberWithOptions(
+                  decimal: true), // Required for IOS to see decimals
+              onSubmitted: (_) => _submitData(),
               decoration: InputDecoration(
                 labelText: "Amount",
               ),
@@ -34,13 +51,7 @@ class NewTransaction extends StatelessWidget {
             FlatButton(
               child: Text("Add Transaction"),
               textColor: Colors.pinkAccent,
-              onPressed: () {
-                // print("Title: ${titleInput} | Amount: ${amountInput}");
-                print(
-                    "Title: ${titleController.text} | Amount: ${amountController.text}");
-                addTx(
-                    titleController.text, double.parse(amountController.text));
-              },
+              onPressed: _submitData,
             )
           ],
         ),
