@@ -8,7 +8,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Expense Planner',
+      title: 'Personal Expense Planner',
+      theme: ThemeData(
+          primarySwatch: Colors.purple,
+          accentColor: Colors.pinkAccent,
+          fontFamily: 'Averia',
+          appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+                    headline6: TextStyle(
+                  fontFamily: "Averia",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
+          )),
       home: Home(),
     );
   }
@@ -22,40 +34,42 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: Text('Expanse Planner'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 100,
-              child: Card(
-                color: Colors.lightBlue[200],
-                shadowColor: Colors.amberAccent,
-                elevation: 10,
-                child: Text("CHART!"),
-              ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          // backgroundColor: Colors.deepPurple,
+          title: Text('Expanse Planner'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => _startAddNewTransaction(context),
             ),
-            TransactionList(_userTransactions),
           ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: Card(
+                  // color: Colors.lightBlue[200],
+                  // shadowColor: Colors.amberAccent,
+                  elevation: 10,
+                  child: Text("CHART!"),
+                ),
+              ),
+              TransactionList(_userTransactions),
+            ],
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        ),
       ),
     );
   }

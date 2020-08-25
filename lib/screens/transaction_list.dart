@@ -10,11 +10,11 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: MediaQuery.of(context).size.height * 0.8,
       child: ListView.builder(
         itemBuilder: (context, index) {
           return Card(
-            shadowColor: Colors.deepPurpleAccent,
+            // shadowColor: Colors.deepPurpleAccent,
             elevation: 3,
             child: Row(
               children: <Widget>[
@@ -22,14 +22,17 @@ class TransactionList extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.purple, width: 0.2),
+                      border: Border.all(
+                        color: Theme.of(context).primaryColorLight,
+                        width: 0.2,
+                      ),
                     ),
                     child: Text(
                       '\$ ${transactions[index].amount.toStringAsFixed(2)}',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Theme.of(context).primaryColor),
                     )),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 15),
@@ -47,7 +50,8 @@ class TransactionList extends StatelessWidget {
                       Container(
                           child: Text(
                         DateFormat.yMMMd().format(transactions[index].dateTime),
-                        style: TextStyle(color: Colors.blueGrey),
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColorDark),
                       )),
                     ],
                   ),

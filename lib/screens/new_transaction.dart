@@ -17,10 +17,12 @@ class _NewTransactionState extends State<NewTransaction> {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
     print("Title: $enteredTitle | Amount: $enteredAmount");
-    // if (enteredTitle.isEmpty || enteredAmount <= 0) {
-    //   return;
-    // }
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
     widget.addTx(enteredTitle, enteredAmount);
+
+    Navigator.of(context).pop();
   }
 
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class _NewTransactionState extends State<NewTransaction> {
             ),
             FlatButton(
               child: Text("Add Transaction"),
-              textColor: Colors.pinkAccent,
+              // textColor: Colors.pinkAccent,
               onPressed: _submitData,
             )
           ],
